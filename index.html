@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DBC Enterprise - Free Bulk Messaging Software for Businesses & Marketers. Send messages efficiently, manage campaigns, and streamline communication.">
+<meta name="keywords" content="bulk messaging software, free messaging tool, campaign management, WhatsApp marketing, DBC Enterprise">
+<title>DBC Enterprise — Free Bulk Messaging Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A0F1E;
+    --navy-mid: #111827;
+    --navy-light: #1E2A3A;
+    --indigo: #4F46E5;
+    --indigo-light: #6366F1;
+    --indigo-dark: #3730A3;
+    --cyan: #06B6D4;
+    --cyan-light: #22D3EE;
+    --green: #25D366;
+    --green-dark: #1DA851;
+    --white: #F8FAFC;
+    --slate: #94A3B8;
+    --slate-light: #CBD5E1;
+    --card-bg: #141B2D;
+    --border: rgba(255,255,255,0.08);
+    --glow-indigo: rgba(79,70,229,0.4);
+    --glow-cyan: rgba(6,182,212,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 1.5rem;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-brand-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--indigo), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .nav-cta {
+    background: var(--green); color: #fff;
+    padding: 0.5rem 1.1rem; border-radius: 8px;
+    font-weight: 700; font-size: 0.8rem;
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 0.4rem;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 1.5rem 4rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,70,229,0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,182,212,0.12) 0%, transparent 60%),
+                var(--navy);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 0%, transparent 80%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(79,70,229,0.15); border: 1px solid rgba(79,70,229,0.35);
+    color: var(--indigo-light); font-size: 0.78rem; font-weight: 600;
+    padding: 0.35rem 0.9rem; border-radius: 999px;
+    margin-bottom: 1.5rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse-dot 2s infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 span { background: linear-gradient(135deg, var(--indigo-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--slate-light);
+    max-width: 560px; margin: 0 auto 2.5rem;
+    font-weight: 400; line-height: 1.7;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--green);
+    color: #fff; font-weight: 700; font-size: 1rem;
+    padding: 0.9rem 2rem; border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 0 30px rgba(37,211,102,0.35), 0 4px 16px rgba(0,0,0,0.3);
+    transition: all 0.25s;
+    margin-bottom: 1rem;
+  }
+  .btn-whatsapp:hover {
+    background: var(--green-dark);
+    box-shadow: 0 0 45px rgba(37,211,102,0.5), 0 8px 24px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+  }
+  .btn-whatsapp svg { flex-shrink: 0; }
+
+  .hero-note { font-size: 0.8rem; color: var(--slate); }
+  .hero-note span { color: var(--cyan); }
+
+  /* PULSE MOCKUP */
+  .hero-visual {
+    position: relative; margin-top: 3.5rem; z-index: 1;
+    display: flex; justify-content: center;
+  }
+  .pulse-wrapper {
+    position: relative; width: 160px; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pulse-ring {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid rgba(37,211,102,0.4);
+    animation: pulse-ring 3s ease-out infinite;
+  }
+  .pulse-ring:nth-child(1) { width: 80px; height: 80px; animation-delay: 0s; }
+  .pulse-ring:nth-child(2) { width: 120px; height: 120px; animation-delay: 0.8s; }
+  .pulse-ring:nth-child(3) { width: 160px; height: 160px; animation-delay: 1.6s; }
+  @keyframes pulse-ring { 0%{opacity:0.9;transform:scale(0.8)} 100%{opacity:0;transform:scale(1.2)} }
+  .pulse-core {
+    width: 64px; height: 64px; border-radius: 18px; z-index: 2;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(37,211,102,0.5);
+    font-size: 1.8rem;
+  }
+
+  /* DASHBOARD MOCKUP STRIP */
+  .dashboard-strip {
+    margin-top: 4rem; z-index: 1; position: relative;
+    width: 100%; max-width: 800px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 60px rgba(79,70,229,0.15);
+  }
+  .db-titlebar {
+    background: #0d1424; padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .db-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .db-dot.r { background: #FF5F57; }
+  .db-dot.y { background: #FEBC2E; }
+  .db-dot.g { background: #28C840; }
+  .db-title-text { font-size: 0.72rem; color: var(--slate); margin-left: 0.5rem; letter-spacing: 0.05em; }
+  .db-body {
+    padding: 1.25rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;
+  }
+  .db-stat {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.85rem 1rem;
+  }
+  .db-stat-label { font-size: 0.68rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+  .db-stat-val { font-size: 1.3rem; font-weight: 800; }
+  .db-stat-val.green { color: var(--green); }
+  .db-stat-val.cyan { color: var(--cyan); }
+  .db-stat-val.indigo { color: var(--indigo-light); }
+  .db-bar-row { grid-column: 1/-1; }
+  .db-bar-label { font-size: 0.68rem; color: var(--slate); margin-bottom: 0.4rem; }
+  .db-bar-track { height: 6px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+  .db-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--indigo), var(--cyan)); animation: fill-bar 2s ease forwards; }
+  @keyframes fill-bar { from{width:0} to{width:78%} }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--card-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: var(--slate); font-weight: 500;
+  }
+  .trust-item .icon { font-size: 1rem; }
+
+  /* SECTIONS */
+  section { padding: 5rem 1.5rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--slate-light); max-width: 540px; line-height: 1.7; }
+  .centered { text-align: center; margin-left: auto; margin-right: auto; }
+
+  /* FEATURES */
+  .features-bg { background: #0d1220; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem; margin-top: 3rem;
+    max-width: 1000px; margin-left: auto; margin-right: auto;
+  }
+  .feature-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.5rem;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--indigo), var(--cyan));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .feature-card:hover { transform: translateY(-4px); border-color: rgba(79,70,229,0.3); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 10px; margin-bottom: 1rem;
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    background: rgba(79,70,229,0.15); border: 1px solid rgba(79,70,229,0.2);
+  }
+  .feature-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+  .feature-desc { font-size: 0.88rem; color: var(--slate); line-height: 1.6; }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+    max-width: 900px; margin-left: auto; margin-right: auto;
+    position: relative;
+  }
+  .step-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem 1.5rem; text-align: center;
+    position: relative;
+  }
+  .step-number {
+    width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 1.25rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--indigo), var(--cyan));
+    box-shadow: 0 0 20px var(--glow-indigo);
+  }
+  .step-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+  .step-desc { font-size: 0.85rem; color: var(--slate); }
+
+  /* BENEFITS */
+  .benefits-bg { background: #0d1220; }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem; margin-top: 2.5rem;
+    max-width: 860px; margin-left: auto; margin-right: auto;
+  }
+  .benefit-item {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.1rem;
+  }
+  .benefit-check {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+    background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: var(--green);
+  }
+  .benefit-text { font-size: 0.9rem; font-weight: 500; color: var(--slate-light); line-height: 1.5; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem; margin-top: 3rem;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+  }
+  .stat-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem 1.5rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .stat-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  }
+  .stat-number {
+    font-size: 2.4rem; font-weight: 900; letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--white), var(--cyan-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--slate); margin-top: 0.25rem; font-weight: 500; }
+  .stat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  /* FAQ */
+  .faq-bg { background: #0d1220; }
+  .faq-list { max-width: 680px; margin: 2.5rem auto 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .faq-item {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 1.1rem 1.25rem; font-weight: 600; font-size: 0.95rem;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    user-select: none; transition: background 0.2s;
+  }
+  .faq-q:hover { background: rgba(255,255,255,0.03); }
+  .faq-arrow { transition: transform 0.3s; color: var(--cyan); font-size: 0.8rem; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    font-size: 0.88rem; color: var(--slate); line-height: 1.7;
+    transition: max-height 0.35s ease, padding 0.3s;
+    padding: 0 1.25rem;
+  }
+  .faq-item.open .faq-a { max-height: 120px; padding: 0 1.25rem 1.1rem; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(79,70,229,0.25) 0%, var(--navy) 70%);
+    text-align: center;
+  }
+  .final-cta .section-title { max-width: 540px; margin: 0 auto 1rem; }
+  .final-cta p { color: var(--slate-light); max-width: 460px; margin: 0 auto 2.5rem; }
+
+  .btn-primary-lg {
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    background: var(--green); color: #fff; font-weight: 700; font-size: 1.05rem;
+    padding: 1rem 2.2rem; border-radius: 12px; text-decoration: none;
+    box-shadow: 0 0 40px rgba(37,211,102,0.4), 0 8px 24px rgba(0,0,0,0.3);
+    transition: all 0.25s;
+  }
+  .btn-primary-lg:hover {
+    background: var(--green-dark); transform: translateY(-3px);
+    box-shadow: 0 0 60px rgba(37,211,102,0.55), 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060a14; border-top: 1px solid var(--border);
+    padding: 2.5rem 1.5rem; text-align: center;
+  }
+  .footer-brand { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+  .footer-brand span { background: linear-gradient(135deg, var(--indigo-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .footer-text { font-size: 0.8rem; color: var(--slate); margin-bottom: 0.4rem; }
+  .footer-contact { font-size: 0.8rem; color: var(--slate); }
+  .footer-contact a { color: var(--cyan); text-decoration: none; }
+  .footer-contact a:hover { text-decoration: underline; }
+  .footer-divider { height: 1px; background: var(--border); margin: 1.25rem auto; max-width: 200px; }
+
+  /* STICKY CTA (mobile) */
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+    padding: 0.85rem 1.25rem;
+    background: rgba(10,15,30,0.95); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: center;
+  }
+  .sticky-cta a {
+    display: flex; align-items: center; gap: 0.55rem;
+    background: var(--green); color: #fff; font-weight: 700; font-size: 0.9rem;
+    padding: 0.75rem 1.5rem; border-radius: 10px; text-decoration: none;
+    box-shadow: 0 0 20px rgba(37,211,102,0.35);
+    transition: all 0.2s; width: 100%; justify-content: center; max-width: 360px;
+  }
+  .sticky-cta a:hover { background: var(--green-dark); transform: scale(1.02); }
+
+  @media(min-width: 640px) {
+    .sticky-cta { display: none; }
+  }
+
+  /* UTILS */
+  .max-w { max-width: 1000px; margin-left: auto; margin-right: auto; }
+  .mt-sm { margin-top: 1rem; }
+
+  /* ANIMATIONS */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+  }
+
+  /* WHATSAPP ICON */
+  .wa-icon { font-size: 1.15rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-brand-icon">💬</div>
+    DBC Enterprise
+  </a>
+  <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener" class="nav-cta">
+    <span>🟢</span> Get Free Access
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      <span class="badge-dot"></span> Now Available — Free for Everyone
+    </div>
+    <h1 class="fade-up">Free Bulk Messaging Software for <span>Businesses & Marketers</span></h1>
+    <p class="hero-sub fade-up">Send messages efficiently, manage campaigns, and streamline communication with DBC Enterprise.</p>
+    <div class="fade-up">
+      <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener" class="btn-whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.122 1.533 5.854L.057 23.527a.5.5 0 0 0 .609.632l5.896-1.545A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.127-1.414l-.366-.218-3.797.995 1.013-3.691-.239-.379A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Join WhatsApp Group & Get Free Access
+      </a>
+      <p class="hero-note">Access is currently available through our <span>exclusive WhatsApp community</span>.</p>
+    </div>
+
+    <div class="hero-visual fade-up">
+      <div class="pulse-wrapper">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring"></div>
+        <div class="pulse-core">💬</div>
+      </div>
+    </div>
+
+    <div class="dashboard-strip fade-up">
+      <div class="db-titlebar">
+        <div class="db-dot r"></div>
+        <div class="db-dot y"></div>
+        <div class="db-dot g"></div>
+        <span class="db-title-text">DBC Enterprise — Campaign Dashboard</span>
+      </div>
+      <div class="db-body">
+        <div class="db-stat">
+          <div class="db-stat-label">Messages Sent</div>
+          <div class="db-stat-val green">12,480</div>
+        </div>
+        <div class="db-stat">
+          <div class="db-stat-label">Campaigns Active</div>
+          <div class="db-stat-val cyan">24</div>
+        </div>
+        <div class="db-stat">
+          <div class="db-stat-label">Delivery Rate</div>
+          <div class="db-stat-val indigo">98.7%</div>
+        </div>
+        <div class="db-bar-row">
+          <div class="db-bar-label">Campaign Progress — Batch #14</div>
+          <div class="db-bar-track"><div class="db-bar-fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="icon">🔒</span> Secure & Private</div>
+  <div class="trust-item"><span class="icon">⚡</span> High-Speed Delivery</div>
+  <div class="trust-item"><span class="icon">🌍</span> Used Globally</div>
+  <div class="trust-item"><span class="icon">🎁</span> 100% Free Access</div>
+  <div class="trust-item"><span class="icon">🤝</span> Community Supported</div>
+</div>
+
+<!-- FEATURES -->
+<section class="features-bg">
+  <div class="max-w">
+    <div class="section-label centered fade-up">Features</div>
+    <h2 class="section-title centered fade-up">Everything You Need to<br>Run Powerful Campaigns</h2>
+    <p class="section-sub centered fade-up">Professional-grade tools — built for scale, designed for simplicity.</p>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📨</div>
+        <div class="feature-title">Bulk Messaging</div>
+        <div class="feature-desc">Reach large audiences instantly with optimized batch delivery built for high volume.</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Campaign Management</div>
+        <div class="feature-desc">Organize, schedule, and track all your messaging campaigns from one clean dashboard.</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🖥️</div>
+        <div class="feature-title">User-Friendly Interface</div>
+        <div class="feature-desc">A simple, intuitive dashboard that works for beginners and seasoned professionals alike.</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Fast Performance</div>
+        <div class="feature-desc">Engineered for reliability and speed — even under heavy communication loads.</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🏢</div>
+        <div class="feature-title">Business Ready</div>
+        <div class="feature-desc">Perfect for agencies, marketers, entrepreneurs, and growing communication teams.</div>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">🎁</div>
+        <div class="feature-title">Free Access</div>
+        <div class="feature-desc">Join our WhatsApp community and start using DBC Enterprise completely free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="max-w">
+    <div class="section-label centered fade-up">How It Works</div>
+    <h2 class="section-title centered fade-up">Up and Running in Three Steps</h2>
+    <p class="section-sub centered fade-up">No complicated setup. Just join, follow the instructions, and get started.</p>
+    <div class="how-grid">
+      <div class="step-card fade-up">
+        <div class="step-number">1</div>
+        <div class="step-title">Join the WhatsApp Group</div>
+        <div class="step-desc">Tap the button and request entry to our exclusive community group.</div>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-number">2</div>
+        <div class="step-title">Receive Access Instructions</div>
+        <div class="step-desc">Once inside, you'll receive clear instructions for downloading DBC Enterprise.</div>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-number">3</div>
+        <div class="step-title">Download & Start Using</div>
+        <div class="step-desc">Install the software and begin running your first bulk messaging campaign.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="fade-up">
+      <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener" class="btn-whatsapp" style="display:inline-flex;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.122 1.533 5.854L.057 23.527a.5.5 0 0 0 .609.632l5.896-1.545A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.127-1.414l-.366-.218-3.797.995 1.013-3.691-.239-.379A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Join Now — It's Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-bg">
+  <div class="max-w">
+    <div class="section-label centered fade-up">Why DBC Enterprise</div>
+    <h2 class="section-title centered fade-up">Why Choose DBC Enterprise?</h2>
+    <p class="section-sub centered fade-up">Built to save time, scale your reach, and grow your business — without the cost.</p>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Easy setup — no technical skills needed</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Professional-grade tools at zero cost</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Save time with automated bulk delivery</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Scalable for small teams and large agencies</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Active community support and guidance</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">100% free — no hidden fees or subscriptions</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Designed for long-term business growth</div>
+      </div>
+      <div class="benefit-item fade-up">
+        <div class="benefit-check">✓</div>
+        <div class="benefit-text">Regular updates and improvements</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="max-w">
+    <div class="section-label centered fade-up">Community</div>
+    <h2 class="section-title centered fade-up">Trusted by a Growing Community</h2>
+    <div class="stats-grid">
+      <div class="stat-card fade-up">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number">1,000+</div>
+        <div class="stat-label">Community Members</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-icon">📈</div>
+        <div class="stat-number">Growing</div>
+        <div class="stat-label">User Base, Month Over Month</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-icon">💬</div>
+        <div class="stat-number">Active</div>
+        <div class="stat-label">Support Community, 24/7</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="fade-up">
+      <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener" class="btn-whatsapp" style="display:inline-flex;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.122 1.533 5.854L.057 23.527a.5.5 0 0 0 .609.632l5.896-1.545A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.127-1.414l-.366-.218-3.797.995 1.013-3.691-.239-.379A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Join the Community
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-bg">
+  <div class="max-w">
+    <div class="section-label centered fade-up">FAQ</div>
+    <h2 class="section-title centered fade-up">Common Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <div class="faq-q">Is DBC Enterprise free? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes. Access to DBC Enterprise is currently provided completely free through our WhatsApp community. There are no subscriptions or hidden charges.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">How do I get access? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Simply join our WhatsApp group using the button on this page and follow the step-by-step instructions shared inside the community.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">Who can use DBC Enterprise? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">DBC Enterprise is designed for businesses, marketing agencies, entrepreneurs, freelancers, and any professional who needs efficient bulk communication tools.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">Is it beginner-friendly? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Absolutely. The platform is intentionally designed to be easy to use from day one. No technical experience is required to get started.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="max-w">
+    <div class="section-label centered fade-up">Get Started Today</div>
+    <h2 class="section-title centered fade-up">Ready to Get Started?</h2>
+    <p class="fade-up">Join our exclusive WhatsApp community and get instant access to DBC Enterprise today — completely free.</p>
+    <div class="fade-up">
+      <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener" class="btn-primary-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.122 1.533 5.854L.057 23.527a.5.5 0 0 0 .609.632l5.896-1.545A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.127-1.414l-.366-.218-3.797.995 1.013-3.691-.239-.379A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Get Free Access Now
+      </a>
+      <p class="hero-note mt-sm">No credit card. No signup form. Just join & download.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><span>DBC Enterprise</span></div>
+  <div class="footer-text">Free Bulk Messaging Software for Businesses & Marketers</div>
+  <div class="footer-divider"></div>
+  <div class="footer-contact">
+    Questions? Join our <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener">WhatsApp community</a> for support.
+  </div>
+  <div class="footer-text" style="margin-top:1rem;">© 2025 DBC Enterprise. All rights reserved.</div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <a href="https://chat.whatsapp.com/G5nd42J10EZ2s6fJRGuuG4" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.122 1.533 5.854L.057 23.527a.5.5 0 0 0 .609.632l5.896-1.545A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.953 9.953 0 0 1-5.127-1.414l-.366-.218-3.797.995 1.013-3.691-.239-.379A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Join WhatsApp Group
+  </a>
+</div>
+
+<script>
+  // Scroll-triggered fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
